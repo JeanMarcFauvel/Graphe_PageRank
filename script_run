@@ -1,0 +1,78 @@
+./run.sh --main PageRankBench -- --master 'local[*]'  \
+  --algo all \
+  --input "/Users/jean-marcfauvel/projets_scala/graphe_page_rank/projet/wiki_data/wiki-chti.txt" \
+  --dataset "wiki_chti" \
+  --iters 5 --beta 0.85 \
+  --partsDF 28 \
+  --storage MEMORY_AND_DISK \
+  --exportTopN 20 \
+  --exportDir "/tmp/pagerank_exports" \
+  --out "/tmp/pagerank_bench_results" --outFormat csv --append \
+  --sep "[|\\s]+"
+
+
+./run.sh --main PageRankBench -- --master 'local[*]'  \
+  --algo all \
+  --input "/Users/jean-marcfauvel/projets_scala/graphe_page_rank/projet/wiki_data/wiki-breton.txt" \
+  --dataset "wiki_breton" \
+  --iters 5 --beta 0.85 \
+  --partsDF 28 \
+  --storage MEMORY_AND_DISK \
+  --exportTopN 20 \
+  --exportDir "/tmp/pagerank_exports" \
+  --out "/tmp/pagerank_bench_results" --outFormat csv --append \
+  --sep "[|\\s]+"
+
+./run.sh --main PageRankBench -- --master 'local[*]'  \
+  --algo all \
+  --input "/Users/jean-marcfauvel/projets_scala/graphe_page_rank/projet/wiki_data/wiki-basque.txt" \
+  --dataset "wiki_basque" \
+  --iters 5 --beta 0.85 \
+  --partsDF 28 \
+  --storage MEMORY_AND_DISK \
+  --exportTopN 20 \
+  --exportDir "/tmp/pagerank_exports" \
+  --out "/tmp/pagerank_bench_results" --outFormat csv --append \
+  --sep "[|\\s]+"
+
+./run.sh --main PageRankBench -- --master 'local[*]'  \
+  --algo all \
+  --input "/Users/jean-marcfauvel/projets_scala/graphe_page_rank/projet/wiki_data/wiki-pt.txt" \
+  --dataset "wiki_pt" \
+  --iters 5 --beta 0.85 \
+  --partsDF 28 \
+  --storage MEMORY_AND_DISK \
+  --exportTopN 20 \
+  --exportDir "/tmp/pagerank_exports" \
+  --out "/tmp/pagerank_bench_results" --outFormat csv --append \
+  --sep "[|\\s]+"
+
+./run.sh --main PageRankBench -- --master 'local[*]' \
+  --algo all \
+  --input "/Users/jean-marcfauvel/projets_scala/graphe_page_rank/projet/wiki_data/wiki-fr.txt" \
+  --dataset "wiki_fr" \
+  --iters 5 --beta 0.85 \
+  --partsDF 28 \
+  --storage MEMORY_AND_DISK \
+  --exportTopN 20 \
+  --exportDir "/tmp/pagerank_exports" \
+  --out "/tmp/pagerank_bench_results" --outFormat csv --append \
+  --sep "[|\\s]+"
+
+# Pour exécuter avec Spark localement (ex: sur un laptop), ajouter l'option
+#  --master local[*] 
+#  à la commande ci-dessus (après --main PageRankBench --)
+# Pour exécuter sur un cluster Spark, adapter l'option --master (ex: yarn, spark://...)
+
+# Export des résultats
+# Le script export_results.sh doit être dans le répertoire courant
+# et avoir les droits d'exécution
+chmod +x export_results.sh # donne les droits d'exécution
+./export_results.sh
+
+# Préparer les répertoires de résultats ou nettoyer les anciens
+rm -rf /tmp/pagerank_bench_results
+mkdir /tmp/pagerank_bench_results
+
+rm -rf /tmp/pagerank_exports
+mkdir /tmp/pagerank_exports
